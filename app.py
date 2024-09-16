@@ -132,7 +132,7 @@ def draw_board(game_state):
                     if check_win(st.session_state.game) is None:
                         ai_move()
                     st.session_state.victory = check_win(st.session_state.game)
-                    st.experimental_rerun()
+                    st.rerun()
 
 def ai_move():
     board = st.session_state.game
