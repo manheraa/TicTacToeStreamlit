@@ -132,6 +132,8 @@ def draw_board(game_state):
                     if check_win(st.session_state.game) is None:
                         ai_move()
                     st.session_state.victory = check_win(st.session_state.game)
+                    if st.session_state.victory is None and all(cell != 0 for cell in st.session_state.game):
+                        st.session_state.victory = 0  # Tie
                     st.rerun()
 
 def ai_move():
@@ -151,6 +153,10 @@ def ai_move():
     
     if best_move is not None:
         st.session_state.game[best_move] = 1  # AI move
+
+    # Check if the game is a tie
+    if check_win(st.session_state.game) is None and all(cell != 0 for cell in st.session_state.game):
+        st.session_state.victory = 0  # Tie
 
 # Check victory status and display results
 if st.session_state.victory is not None:
